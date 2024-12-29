@@ -36,7 +36,24 @@ const CreateProductsController = CatchAsync(
   }
 );
 
+// Get single products
+const SingleProductsController = CatchAsync(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    const result = await ProductServices.SingleProductService(id);
+
+    SendResponse<IProduct>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Single product get successfully!",
+      data: result,
+    });
+  }
+);
+
 export const ProductController = {
   getAllProductsController,
   CreateProductsController,
+  SingleProductsController,
 };
