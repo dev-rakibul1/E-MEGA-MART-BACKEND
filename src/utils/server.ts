@@ -1,18 +1,20 @@
 import dotenv from "dotenv";
 import { Server } from "http";
 import mongoose from "mongoose";
-import Config from "../config/Config";
 import app from "../index";
 dotenv.config();
+
+const CLOUD_URI =
+  "mongodb+srv://megaMart_backend:Akh3GpsTK86d_PL@cluster0.ap1bp.mongodb.net/megaMart_DB?retryWrites=true&w=majority&appName=Cluster0";
 
 let server: Server;
 const databaseConnect = async () => {
   try {
-    await mongoose.connect(Config.database_urls as string);
+    await mongoose.connect(CLOUD_URI as string);
     console.log("Database is connected!");
 
-    server = app.listen(Config.port, () => {
-      console.log(`Example app listening on port ${Config.port}`);
+    server = app.listen(3007, () => {
+      console.log(`Example app listening on port ${3007}`);
     });
   } catch (error) {
     console.error("Fail to DB connected!");
